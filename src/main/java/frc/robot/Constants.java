@@ -66,8 +66,8 @@ public final class Constants {
     public static final double voltageComp = 12.0; // setting the nominal voltage(won't really follow anyway)
 
     /* Swerve Current Limiting */
-    public static final int angleContinuousCurrentLimit = 40; //20
-    public static final int driveContinuousCurrentLimit = 80; //80, limiting the amps so Neo won't brake
+    public static final int angleContinuousCurrentLimit = 20; //20
+    public static final int driveContinuousCurrentLimit = 40; //80, limiting the amps so Neo won't brake
 
     /* Angle Motor PID Values */
     public static final double angleKP = 0.01;
@@ -90,8 +90,8 @@ public final class Constants {
     public static final double angleConversionFactor = 360.0 / angleGearRatio; // like constants in physics
 
     /* Swerve Profiling Values */
-    public static final double maxSpeed = 4.4; // meters per second
-    public static final double maxAngularVelocity = 60; // meters per second
+    public static final double maxSpeed = 4.5; // meters per second
+    public static final double maxAngularVelocity = 2.3;// meters per second
 
     /* Neutral Modes */
     public static final IdleMode angleNeutralMode = IdleMode.kCoast;

@@ -2,17 +2,14 @@ package frc.robot.commands;
 
 import frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
-
-import com.revrobotics.CANSparkBase.ControlType;
-
 import edu.wpi.first.wpilibj.PS4Controller;
-
 
 
 
 public class ShooterCommand extends Command {
     private final ShooterSubsystem shooterSubsystem;
     private PS4Controller driver;
+
 
 
     public ShooterCommand(ShooterSubsystem shooterSubsystem, PS4Controller driver) {
@@ -27,34 +24,41 @@ public class ShooterCommand extends Command {
     @Override
     public void execute() {
 
+        shooterSubsystem.getShooterPosition();
+
+        if(driver.getL1Button()) {
+
+         shooterSubsystem.ShootertoPosition(0.15);
+
+        }
+
+
         if(driver.getTriangleButton()) {
 
-            shooterSubsystem.ortadan.set(1);
+           shooterSubsystem.shootFlywheelOnRPM(8000); 
+            shooterSubsystem.shootFlywheelOnRPM(8000); 
+
+     
+        }
+
+        if(driver.getR2Button())  {
+        shooterSubsystem.FeederMtr.set(0.6);
+        }
 
 
-            shooterSubsystem.ShootertoPosition(0.3);
+        if(driver.getCrossButton()) {
+
+         shooterSubsystem.ShootertoPosition(0.05);
         }
 
         if(driver.getCircleButton()) {
 
-            shooterSubsystem.ShootertoPosition(20);
+            shooterSubsystem.stopMotors();
         }
-
-        if(driver.getSquareButton()) {
-
-            shooterSubsystem.ShootertoPosition(30);
-        }
-
-      
-        if (driver.getCircleButton()) {
-            shooterSubsystem.shootFlywheelOnRPM(7000); } 
-            
-        if(driver.getR2Button()) {
-            shooterSubsystem.shootFlywheelOnRPM(0);
-
-        }
+        
       }
-    
+
     }
 
-    
+    // Yukarı yön tuşu shooter açı: shooter angle(angle1), shooter(+), TimeDelay 2 seconds, feedmotor(+), roller(+)
+

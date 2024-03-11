@@ -8,52 +8,36 @@ import edu.wpi.first.wpilibj.Timer;
 
 
 
-public class IntakeCommand extends Command {
+public class AUTOINTAKE extends Command {
     private final IntakeSubsystem intakeSubsystem;
-    private PS4Controller driver;
     private final Timer timer = new Timer();
-    private boolean isDelayActive = false;
     
 
 
-    public IntakeCommand(IntakeSubsystem intakeSubsystem, PS4Controller driver) {
+    public AUTOINTAKE(IntakeSubsystem intakeSubsystem) {
         addRequirements(intakeSubsystem);
-         
         this.intakeSubsystem = intakeSubsystem;
-        this.driver = driver;
+
+        timer.reset();
+        timer.start();
+        intakeSubsystem.openIntake();
+        intakeSubsystem.setIntakeSpeed(-0.5);
+
+
+        if(timer.get() == 2) {
+        intakeSubsystem.closeIntake();
+        timer.reset();
+        timer.stop();
+
+        }
+
 
         
     }
 
-    @Override
-    public void execute() {
-
-        if(driver.getL1Button()){
-            intakeSubsystem.openIntake();
-            intakeSubsystem.setIntakeSpeed(-0.5);
-        }
-
-        if(driver.getL2Button()) {
-            intakeSubsystem.stopMotors();
-            intakeSubsystem.closeIntake();
-        }
-
-         if(driver.getR2Button()) {
-
-            intakeSubsystem.setIntakeSpeed(0.4);
-
-
-        }
-
-         if(driver.getCircleButton()) {
-
-            intakeSubsystem.stopMotors();
-
- 
-         }
-    }
 
 }
+
 
 // L1 Button, intake alım: intake open position, roller (-), TimeDelay 2 seconds, roller (0), intake close position.
 

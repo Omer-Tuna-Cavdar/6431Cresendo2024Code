@@ -36,7 +36,7 @@ public class TeleopSwerve extends Command {
         this.yukari_asagi =driver.getLeftY();
         this.sag_sol = driver.getLeftX();
         this.donme = driver.getRightX();
-        this.zeroGyro = driver.getL1Button();
+        this.zeroGyro = driver.getOptionsButton();
       
       if(zeroGyro) {
 
@@ -49,10 +49,9 @@ public class TeleopSwerve extends Command {
 
       swerve.drive(
         new Translation2d(translationVal, strafeVal).times(Constants.Swerve.maxSpeed),
-        rotationVal, Constants.Swerve.fieldOriented,
+        rotationVal * Constants.Swerve.maxAngularVelocity, Constants.Swerve.fieldOriented,
         true
       );
-      System.out.println(yukari_asagi + " " + sag_sol + " " + donme);
       
     
     

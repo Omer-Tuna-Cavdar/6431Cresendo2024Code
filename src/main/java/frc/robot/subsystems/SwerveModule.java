@@ -16,9 +16,7 @@ import frc.ChenryLib.MathUtility;
 import frc.ChenryLib.PID;
 import frc.lib.config.SwerveModuleConstants;
 import frc.lib.math.OnboardModuleState;
-// import frc.lib.util.CANCoderUtil;
 import frc.lib.util.CANSparkMaxUtil;
-// import frc.lib.util.CANCoderUtil.CCUsage;
 import frc.lib.util.CANSparkMaxUtil.Usage;
 import frc.robot.Constants;
 
@@ -140,7 +138,7 @@ public class SwerveModule extends SubsystemBase {
   }
 
   public void setAngleMotor(double speed) {
-    angleMotor.set(speed);
+    angleMotor.set(6);
   }
 
   public void setDriveMotor(double speed) {

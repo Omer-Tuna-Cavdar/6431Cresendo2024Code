@@ -1,40 +1,39 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkBase.ControlType;
 import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
-import edu.wpi.first.wpilibj.DutyCycleEncoder;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
 
 public class IntakeSubsystem extends SubsystemBase {
 
-    private final CANSparkMax intakeMotor;
-    private final CANSparkMax pivotMotor;
-    private final DutyCycleEncoder pivotEncoder;
+        CANSparkMax intakeMotor = new CANSparkMax(10, MotorType.kBrushless);
+        CANSparkMax pivotMotor = new CANSparkMax(9, MotorType.kBrushless);
+        RelativeEncoder pivotEncoder = pivotMotor.getEncoder();
 
-    public final double openPosition = 0.0; //TODO Placeholder - set to actual encoder value for open
-    public final double closedPosition = 20; //TODO Placeholder - set to actual encoder value for closed
+    public final double openPosition = -38; 
+    public final double closedPosition =-2; 
 
     public IntakeSubsystem() {
-        intakeMotor = new CANSparkMax(10, MotorType.kBrushless);
-        pivotMotor = new CANSparkMax(9, MotorType.kBrushless);
-        pivotEncoder = new DutyCycleEncoder(0);
 
-        pivotMotor.getPIDController().setP(0.1); // Adjust PID values as needed
+
+
+        pivotMotor.getPIDController().setP(0.1); 
         pivotMotor.getPIDController().setI(0.0);
         pivotMotor.getPIDController().setD(0.0);
-        pivotMotor.getPIDController().setFF(1.0 / 5800.0);
-        pivotEncoder.setPositionOffset(0);
         intakeMotor.setIdleMode(IdleMode.kCoast);
         pivotMotor.setIdleMode(IdleMode.kBrake);
 
 
-
         pivotMotor.setSmartCurrentLimit(45);
+        pivotEncoder.setPosition(0);
 
         intakeMotor.setSmartCurrentLimit(25);
+
+
     }
 
     public void setIntakeSpeed(double speed) {
@@ -42,29 +41,26 @@ public class IntakeSubsystem extends SubsystemBase {
     }
 
     public void pivotToPosition(double position) {
-        pivotMotor.getPIDController().setReference(position, ControlType.kPosition);
-    }
 
-    public boolean isPivotAtTarget(double targetPosition) {
-        return Math.abs(pivotEncoder.get() - targetPosition) < 0.05; // Adjust tolerance as needed
+        pivotMotor.getPIDController().setReference(position, ControlType.kPosition);
     }
 
     public void openIntake() {
         pivotToPosition(openPosition);
-        setIntakeSpeed(0.3);
     }
 
     public void closeIntake() {
         pivotToPosition(closedPosition);
-         setIntakeSpeed(0);
     }
 
     public double getPivotPosition() {
-        return pivotEncoder.get();
+        return pivotEncoder.getPosition();
     }
 
-    public void runIntake() {
-            setIntakeSpeed(1.0); // Adjust speed as needed
-        SmartDashboard.putNumber("Intake Pivot Encoder", pivotEncoder.getAbsolutePosition());
+    public void stopMotors() {
+
+        setIntakeSpeed(0);
     }
+
+
 }

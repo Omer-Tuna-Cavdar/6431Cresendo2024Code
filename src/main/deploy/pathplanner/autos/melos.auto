@@ -1,0 +1,61 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 0.4764393472940521,
+      "y": 6.6619944758214125
+    },
+    "rotation": -26.565051177077965
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "named",
+          "data": {
+            "name": "AUTOSHOOTER"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "bir"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AUTOINTAKE"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "iki"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AUTOSHOOTER"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AUTOINTAKE"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AUTOSHOOTER"
+          }
+        }
+      ]
+    }
+  },
+  "folder": null,
+  "choreoAuto": false
+}
